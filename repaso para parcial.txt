@@ -1,0 +1,104 @@
+PASOS
+
+1. CREAR EL PROYECTO
+
+
+
+
+
+
+
+
+
+Scaffold-DBContext "Server=ACERNITRO5;Database=StoreDB;integrated security=true;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Data -Force -nopluralize
+
+
+
+
+Install-Package Microsoft.EntityFrameworkCore
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
+Install-Package Microsoft.EntityFrameworkCore.Tools
+
+
+Scaffold-DBContext "Server=ACERNITRO5;Database=StoreDB;integrated security=true;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Infrastructure/Data -Force -nopluralize
+
+
+"Server=ACERNITRO5;Database=StoreDB;integrated security=true;TrustServerCertificate=True"
+
+
+
+PARA CAMBIAR EL EDITOR
+
+git config
+
+
+-----------------------------------------------------------
+
+1. CREAR NUEVO PROYECTO
+
+2. AGREGAR BIBLIOTECA EN LA SOLUCION DEL PROYECTO
+
+3. Opcional - AGREGAR PROYECTO DE BASE DE DATOS DE SQL SERVER
+
+4. Crear Estructura de carpetas del proyecto
+
+5. Instalar las dependencias en la BIBLIOTECA DE CLASES.
+
+6. Hacer Scaffold de la base de datos.
+
+Scaffold-DBContext "Server=ACERNITRO5;Database=StoreDB;integrated security=true;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Infrastructure/Data -Force -nopluralize
+
+
+
+7. Mover las entidades de la base de datos a la carpeta ENTITIES excepto StoreDBContex.cs
+
+8. Agregar las credenciales de base de datos en el archivo appsettings.json.
+
+  "ConnectionStrings": {
+    "DevConnection": "Server=ACERNITRO5;Database=StoreDB;integrated security=true;TrustServerCertificate=True"
+  }
+
+
+
+9. Agregar el codigo al archivo Programs.cs.
+
+// Add services to the container.
+
+var _config = builder.Configuration;
+var _cnx = _config.GetConnectionString("DevConnection");
+builder
+    .Services
+    .AddDbContext<StoreDbContext>(options =>
+    {
+        options.UseSqlServer(_cnx);
+    });
+
+
+- Hacer Usin para mapear las rutas, eliminar otro Store Db Contex en caso lo haya.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------PC 2 ---------------
+
+Hacer la clase de la Entidad Usuario
+
+Users:
++ Sign Up - (create)
++ Sign In (Post)HttpPost
++ Delete
+
+
+
